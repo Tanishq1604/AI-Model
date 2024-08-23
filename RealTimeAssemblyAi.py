@@ -8,6 +8,8 @@
 
 import assemblyai as aai
 
+################## api-key paid ##################
+
 aai.settings.api_key = "124728e77ce14dea8a7975d686fb0b3d"
 
 def on_open(session_opened: aai.RealtimeSessionOpened):

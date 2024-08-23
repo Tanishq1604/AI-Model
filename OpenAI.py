@@ -1,6 +1,6 @@
 from openai import OpenAI
 client = OpenAI()
-
+################## api-key paid ##################
 audio_file = open("/path/to/file/speech.mp3", "rb")
 transcription = client.audio.transcriptions.create(
   model="whisper-1", 
