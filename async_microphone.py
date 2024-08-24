@@ -40,6 +40,7 @@ async def main():
         # otherwise, use default config
         # deepgram: DeepgramClient = DeepgramClient()
 
+
         dg_connection = deepgram.listen.asyncwebsocket.v("1")
 
         async def on_open(self, open, **kwargs):
