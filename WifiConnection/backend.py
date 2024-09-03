@@ -1,10 +1,10 @@
 import requests
 
 # Replace with your ESP32's IP address
-esp32_ip = "http://YOUR_ESP32_IP_ADDRESS"
+esp32_ip = "http://192.168.123.198"
 
 # Data to send to the ESP32
-data = "Hello from Python!"
+data = "SOS"
 
 # Send POST request
 response = requests.post(esp32_ip, data=data)

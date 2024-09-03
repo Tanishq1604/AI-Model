@@ -2,9 +2,9 @@ from dotenv import load_dotenv
 from time import sleep
 import logging
 import requests
-
+import re
 # Replace with your ESP32's IP address
-esp32_ip = "http://YOUR_ESP32_IP_ADDRESS"
+esp32_ip = "http://192.168.123.198"
 
 # Data to send to the ESP32
 
@@ -51,28 +51,32 @@ def main():
             if len(sentence) == 0:
                 return
             if result.is_final:
-                print(f"Message: {result.to_json()}")
+                # print(f"Message: {result.to_json()}")
                 # We need to collect these and concatenate them together when we get a speech_final=true
                 # See docs: https://developers.deepgram.com/docs/understand-endpointing-interim-results
                 is_finals.append(sentence)
-
+                
                 # Speech Final means we have detected sufficent silence to consider this end of speech
                 # Speech final is the lowest latency result as it triggers as soon an the endpointing value has triggered
                 if result.speech_final:
                     utterance = " ".join(is_finals)
-                    print(f"Speech Final: {utterance}")
-                    response = requests.post(esp32_ip, data=utterance)
+                    cleaned_utterance = re.sub(r'[^\w\s\?]', '', utterance)
+                    output = cleaned_utterance.upper()
+                    # print(f"Speech Final: {utterance}")
+                    response = requests.post(esp32_ip, data=output)
+                    print(output)
                     print("Status Code:", response.status_code)
-                    print("Response Text:", response.text)
+                    # print("Status Code:", response.status_code)
+                    # print("Response Text:", response.text)
                     # complete.append(utterance)
                     # print("Complete : ",complete)
                     is_finals = []
                 else:
                     # These are useful if you need real time captioning and update what the Interim Results produced
                     print(f"Is Final: {sentence}")
-            else:
-                # These are useful if you need real time captioning of what is being spoken
-                print(f"Interim Results: {sentence}")
+            # else:
+            #     # These are useful if you need real time captioning of what is being spoken
+            #     print(f"Interim Results: {sentence}")
 
         def on_metadata(self, metadata, **kwargs):
             print(f"Metadata: {metadata}")
@@ -85,7 +89,7 @@ def main():
             global is_finals
             if len(is_finals) > 0:
                 utterance = " ".join(is_finals)
-                print(f"Utterance End: {utterance}")
+                # print(f"Utterance End: {utterance}")
                 
                 is_finals = []
 
