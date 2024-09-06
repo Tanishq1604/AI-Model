@@ -36,9 +36,9 @@ def receive_data():
         return jsonify({"error": "Failed to process the request."}), 500
         
 @app.route('/',methods=['GET'])
-def data(){
+def data()
      return "hello world", 200
-}
+
 
 @app.route('/app', methods=['POST'])
 def receive_app_data():
