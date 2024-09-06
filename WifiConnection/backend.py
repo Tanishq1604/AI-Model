@@ -1,7 +1,7 @@
 import requests
 
 # Replace with your ESP32's IP address
-esp32_ip = "http://192.168.123.198"
+esp32_ip = "http://192.168.184.198"
 
 # Data to send to the ESP32
 data = "SOS"

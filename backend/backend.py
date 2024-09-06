@@ -13,7 +13,7 @@ def receive_data():
 
         # Log the received data
         print(f'Received button: {button}')
-        esp32_ip = "http://192.168.123.198"
+        esp32_ip = "http://192.168.184.198"
 
         # Data to send to the ESP32
         # data = "SOS"
@@ -45,7 +45,7 @@ def receive_app_data():
         data_app = request.data_app.decode('utf-8')  # Get raw data if not JSON
     print(f"Received data: {data_app}")
     # print((data_app['message']))
-    esp32_ip = "http://192.168.123.198"
+    esp32_ip = "http://192.168.184.198"
 
         # Data to send to the ESP32
         # data = "SOS"
